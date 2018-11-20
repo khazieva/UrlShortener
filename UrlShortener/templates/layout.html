@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <title>UrlShortener</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <body>
+        <div id="container">
+            <h1>URL SHORTENER</h1>
+            {% block body %}
+            {% endblock %}
+        </div>
+        <footer id="footer">
+            <hr />
+            <p>&copy; Kristina Khazieva, 2018</p>
+        </footer>
+    </body>
+</html>

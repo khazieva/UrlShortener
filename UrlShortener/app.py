@@ -28,3 +28,18 @@ def get_db():
     if not hasattr(g, 'db_connection'):
         g.db_connection = storage.init_db()
     return g.db_connection
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/generate_link', methods=['POST'])
+def generate_link():
+    link = request.form['inputlink']
+    return render_template('result.html')
+
+
+if __name__ == '__main__':
+    app.run()

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+    <form action="{{ url_for('generate_link') }}" method=post>
+        <dl>
+            <dt>Paste your link:</dt>
+            <dd><input type=text name=inputlink></dd>
+            <dd><input type=submit value=Send></dd>
+        </dl>
+    </form>
+{% endblock %}
