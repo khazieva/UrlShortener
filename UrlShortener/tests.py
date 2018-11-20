@@ -22,7 +22,7 @@ def test_init_and_remove(name, base_path):
 
 
 def run_tests_init_and_remove():
-    test_init_and_remove("1", './my_db.sqlite')
+    test_init_and_remove("1", './test_db.sqlite')
 
 
 def run_tests():
