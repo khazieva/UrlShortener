@@ -1,4 +1,5 @@
 import os
+import base62
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 import storage
 
@@ -26,7 +27,8 @@ app.config.from_envvar('APP_SETTINGS', silent=True)
 def get_db():
     """ Если еще нет соединения с БД, открыть новое - для текущего контекста приложения. """
     if not hasattr(g, 'db_connection'):
-        g.db_connection = storage.init_db()
+        g.db_connection = storage.init_db(app.config['DATABASE'])
+        g.current_index = len(g.db_connection)
     return g.db_connection
 
 
@@ -38,7 +40,19 @@ def index():
 @app.route('/generate_link', methods=['POST'])
 def generate_link():
     link = request.form['inputlink']
-    return render_template('result.html')
+    db = get_db()
+    db[g.current_index] = link
+    result_link = base62.encode(g.current_index)
+    g.current_index += 1
+    return render_template('result.html', result_link=result_link)
+
+
+@app.route('/<short_link>')
+def open_link(short_link):
+    index = base62.decode(short_link)
+    db = get_db()
+    open_link = db[index]
+    return redirect(open_link)
 
 
 if __name__ == '__main__':
