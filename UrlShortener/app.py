@@ -40,9 +40,11 @@ def index():
 @app.route('/generate_link', methods=['POST'])
 def generate_link():
     link = request.form['inputlink']
+    if len(link) == 0:
+        return redirect(url_for('index'))
     db = get_db()
     db[g.current_index] = link
-    result_link = base62.encode(g.current_index)
+    result_link = url_for('open_link', short_link=base62.encode(g.current_index), _external=True)
     g.current_index += 1
     return render_template('result.html', result_link=result_link)
 

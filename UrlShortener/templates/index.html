@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
-    <form action="{{ url_for('generate_link') }}" method=post>
+    <form action="{{ url_for('generate_link') }}" method=post style="max-width: 20%; margin: 0 auto">
         <dl>
-            <dt>Paste your link:</dt>
-            <dd><input type=text name=inputlink></dd>
-            <dd><input type=submit value=Send></dd>
+            <fieldset>
+                <label>Paste your link: <input type=text name=inputlink></label>
+                <p></p>
+                <dd><input type=submit value=Send></dd>
+            </fieldset>
         </dl>
     </form>
 {% endblock %}
